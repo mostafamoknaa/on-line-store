@@ -4,9 +4,14 @@ use App\Http\Controllers\CartsController;
 use App\Http\Controllers\OrdersController;
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\SectionsController;
+use App\Http\Controllers\Stripecontroller;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 use App\Mail\store;
+use App\Models\User;
+use App\Notifications\UserRegisteredNotification;
+use Illuminate\Support\Facades\Notification;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -23,8 +28,11 @@ Route::get('/', function () {
 });
 
 Route::get('/sections', function () {
+    Notification::send(User::all(),new UserRegisteredNotification());
     return view('home.dashboard');
 })->middleware(['auth'])->name('dashboard');
+
+
 
 require __DIR__.'/auth.php';
 
@@ -33,7 +41,4 @@ Route::resource('/products',ProductsController::class);
 Route::resource('/carts',CartsController::class);
 Route::resource('/orders',OrdersController::class);
 
-Route::get('/send', function () {
-    Mail::to('marwanmokn3@gmail.com')->send(new store());
-    return response("sendding");
-});
+
