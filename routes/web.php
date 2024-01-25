@@ -4,6 +4,7 @@ use App\Http\Controllers\CartsController;
 use App\Http\Controllers\OrdersController;
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\SectionsController;
+use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\Stripecontroller;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
@@ -40,5 +41,7 @@ Route::resource('/sections',SectionsController::class);
 Route::resource('/products',ProductsController::class);
 Route::resource('/carts',CartsController::class);
 Route::resource('/orders',OrdersController::class);
+Route::get('checkout',[CheckoutController::class,'checkout']);
+Route::post('checkout',[CheckoutController::class,'afterpayment'])->name('payment.checkout');
 
 

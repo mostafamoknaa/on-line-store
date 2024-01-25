@@ -54,6 +54,7 @@ class OrdersController extends Controller
             'total'=>$total,
             'Address'=>$request->address,
         ]);
+        
         carts::where('user_id',$us)->delete();
         return redirect('/sections');
     }

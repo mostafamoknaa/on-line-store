@@ -18,8 +18,12 @@
                 <td>$ 10</td>
               </tr>
               <tr>
-                <td>Total Amount</td>
+                <td>Delivery Amount</td>
               <td>$ {{$total+10}}</td>
+              </tr>
+              <tr>
+                <td>Visa Amount</td>
+              <td>$ {{$total+5}}</td>
               </tr>
             </tbody>
           </table>
@@ -31,10 +35,10 @@
                 </div>
                 <div class="form-group">
                   <label for="pwd">Payment Method</label> <br> <br>
-                  <input type="radio" value="cash" name="payment"> <span>Payment on Delivery</span> <br> <br>
-
+                  <button class="btn btn-success" type="submit" value="cash">Pay on Delivery {{$total+10}} EUR </button>
+                  <a class="btn btn-success" href="/checkout">Pay By Visa {{$total+5}} EUR </a>
                 </div>
-                <button type="submit" class="btn btn-success">Order Now</button>
+
               </form>
           </div>
      </div>
