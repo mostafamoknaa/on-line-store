@@ -1,13 +1,16 @@
 <?php
 
 namespace App\Notifications;
-
+use App\Models\carts;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
+use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\Productcontroller;
+use Illuminate\Support\Facades\Auth;
 
-class UserRegisteredNotification extends Notification
+class PayVisaNotification extends Notification
 {
     use Queueable;
 
@@ -40,13 +43,21 @@ class UserRegisteredNotification extends Notification
      */
     public function toMail($notifiable)
     {
+        $us=Auth::id();
+        $carts=carts::get()->where('user_id',$us);
+        $total=
+        carts::join('products','carts.product_id','=','products.id')
+        ->where('carts.user_id',$us)
+        ->sum('products.price');
+        $total+=5;
         return (new MailMessage)
-            ->subject('Welcome to Your Application')
-            ->greeting('Hello!')
-            ->line('You will find what you want here')
-            ->line('Thank you for registering on our website.')
-            ->action('Visit Our Website', url("/sections"))
-            ->line('If you have any questions, feel free to contact us.');
+                     
+                    ->line('welcome to Store.')
+                    ->line('All You Want is here.')
+                    ->line('Your money is '.$total)
+                    ->line('Your Deleivy Arrive withen 2 days.')
+                    ->action('Return To Store', url("/sections"))
+                    ->line('Thank you for using our application!');
     }
 
     /**

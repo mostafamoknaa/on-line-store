@@ -2,10 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\orders;
 use App\Models\carts;
+use App\Models\User;
+use App\Notifications\PayVisaNotification;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Notification;
+
+
 class CheckoutController extends Controller
 {
     public function checkout()
@@ -40,6 +45,7 @@ class CheckoutController extends Controller
             'Address'=>"alex"
         ]);
         $us=Auth::id();
+        Notification::send(User::all(),new PayVisaNotification());
         carts::where('user_id',$us)->delete();
         return redirect()->route('sections.index');
     }

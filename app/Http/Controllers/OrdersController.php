@@ -4,8 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\orders;
 use App\Models\carts;
+use App\Models\User;
+use App\Notifications\OnDeleivryNotification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Notification;
 
 class OrdersController extends Controller
 {
@@ -54,7 +57,7 @@ class OrdersController extends Controller
             'total'=>$total,
             'Address'=>$request->address,
         ]);
-        
+        Notification::send(User::all(),new OnDeleivryNotification());
         carts::where('user_id',$us)->delete();
         return redirect('/sections');
     }
