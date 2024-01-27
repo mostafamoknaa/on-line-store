@@ -45,7 +45,7 @@ class CheckoutController extends Controller
             'Address'=>"alex"
         ]);
         $us=Auth::id();
-        Notification::send(User::all(),new PayVisaNotification());
+        Notification::send(Auth::user(),new PayVisaNotification());
         carts::where('user_id',$us)->delete();
         return redirect()->route('sections.index');
     }

@@ -54,8 +54,8 @@ class PayVisaNotification extends Notification
                      
                     ->line('welcome to Store.')
                     ->line('All You Want is here.')
-                    ->line('Your money is '.$total)
-                    ->line('Your Deleivy Arrive withen 2 days.')
+                    ->line('Your Pay '.$total)
+                    ->line('Your Delivery Arrive withen 2 days.')
                     ->action('Return To Store', url("/sections"))
                     ->line('Thank you for using our application!');
     }

@@ -57,7 +57,7 @@ class OrdersController extends Controller
             'total'=>$total,
             'Address'=>$request->address,
         ]);
-        Notification::send(User::all(),new OnDeleivryNotification());
+        Notification::send(Auth::user(),new OnDeleivryNotification());
         carts::where('user_id',$us)->delete();
         return redirect('/sections');
     }

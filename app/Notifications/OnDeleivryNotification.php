@@ -55,8 +55,8 @@ class OnDeleivryNotification extends Notification
                      
                     ->line('welcome to Store.')
                     ->line('All You Want is here.')
-                    ->line('Your money is '.$total)
-                    ->line('Your Deleivy Arrive withen a weak.')
+                    ->line('You Pay '.$total)
+                    ->line('Your Delivery Arrive withen a weak.')
                     ->action('Return To Store', url("/sections"))
                     ->line('Thank you for using our application!');
     }
